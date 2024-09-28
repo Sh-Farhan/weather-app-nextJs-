@@ -18,6 +18,13 @@ const Display = () => {
     const inputRef = useRef();
 
     const fetchData = async (inputCity) => {
+
+        if (!API_key) {
+            setErrorMessage("API key is missing or not set!");
+            console.error("API key is missing or undefined.");
+            return;
+        }
+
         const URL = `https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&units=metric&appid=${API_key}`;
         let details = await fetch(URL);
         let data = await details.json();
